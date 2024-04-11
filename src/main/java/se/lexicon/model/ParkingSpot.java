@@ -30,14 +30,11 @@ public class ParkingSpot {
         occupied = false;
     }
 
-    // todo: add getDescription method with using StringBuilder
-    @Override
-    public String toString() {
-        return "ParkingSpot{" +
-                "spotNumber=" + spotNumber +
-                ", occupied=" + occupied +
-                ", areaCode=" + areaCode +
-                '}';
+    public String getDescription() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("Spot number: ").append(spotNumber).append("\n")
+                .append("Occupied: ").append(occupied ? "Yes" : "No" ).append("\n")
+                .append("Area Code: ").append(areaCode).append("\n");
+        return builder.toString();
     }
-
 }

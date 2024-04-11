@@ -1,5 +1,7 @@
 package se.lexicon.model;
 
+import se.lexicon.data.sequencer.CustomerSequencer;
+
 public class Customer {
 
     private int id;
@@ -8,6 +10,7 @@ public class Customer {
     private Reservation reservation;
 
     public Customer(String name, String phoneNumber) {
+        id = CustomerSequencer.nextId();
         this.name = name;
         this.phoneNumber = phoneNumber;
     }

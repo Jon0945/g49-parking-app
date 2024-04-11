@@ -3,6 +3,7 @@ package se.lexicon.data.impl;
 import se.lexicon.data.CustomerDao;
 import se.lexicon.data.sequencer.CustomerSequencer;
 import se.lexicon.model.Customer;
+import se.lexicon.model.Vehicle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,8 +15,10 @@ public class CustomerDaoImpl implements CustomerDao {
 
     @Override
     public Customer create(Customer customer) {
-        //todo: Add necessary validations
+        if (customer == null) throw new IllegalArgumentException("Customer data is null");
         int id = CustomerSequencer.nextId();
+        Optional<Customer> customerOptional = find(customer.getId());
+        if(customerOptional.isPresent()) throw new IllegalArgumentException("Customer already exists");
         customer.setId(id);
         storage.add(customer);
         return customer;
