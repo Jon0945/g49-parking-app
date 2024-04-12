@@ -32,6 +32,14 @@ public class CustomerDaoImplTest {
     }
 
     @Test
+    public void testCreateExistingCustomer() {
+        Customer testCustomer = new Customer(1001,"Jenny","8675309");
+        testObject.create(testCustomer);
+        assertThrows(IllegalArgumentException.class, ()->testObject.create(testCustomer));
+
+    }
+
+    @Test
     public void findById() {
         Customer testCustomer = new Customer(1001,"Jenny","8675309");
         testObject.create(testCustomer);
@@ -44,7 +52,7 @@ public class CustomerDaoImplTest {
     }
 
     @Test
-    public void testNonExistentCustomer() {
+    public void testFindNonExistentCustomer() {
         Customer testCustomer = new Customer(1001,"Jenny","8675309");
         testObject.create(testCustomer);
 
@@ -56,18 +64,16 @@ public class CustomerDaoImplTest {
     public void testRemoveCustomer() {
         Customer testCustomer = new Customer(1001,"Jenny","8675309");
         testObject.create(testCustomer);
-        testObject.remove(1001);
 
-
-        assertTrue(testObject.findAll().isEmpty());
+        assertTrue(testObject.remove(1001));
+        assertFalse(testObject.find(1001).isPresent());
     }
 
     @Test
     public void testRemoveNonExistentCustomer() {
-        Customer testCustomer = new Customer(1001,"Jenny","8675309");
-        testObject.create(testCustomer);
+        boolean removed = testObject.remove(2002);
 
-        assertFalse(testObject.remove(2002));
+        assertFalse(removed);
     }
 
     @Test

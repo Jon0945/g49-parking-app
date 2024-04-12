@@ -34,8 +34,7 @@ public class ParkingSpotDaoImpl implements ParkingSpotDao {
             if(p.getSpotNumber() == spotNumber) {
                 spots.remove(p);
                 return true;
-            }
-        }
+            }}
         return false;
     }
     @Override
